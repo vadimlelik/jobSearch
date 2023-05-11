@@ -5,7 +5,6 @@ const jobEndpoint = "vacancies/";
 const jobService = {
     get: async () => {
         const { data } = await httpService.get(jobEndpoint);
-        console.log(data, "dasdsa");
         return data;
     },
     getCurrentById: async (id) => {

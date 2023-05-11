@@ -37,4 +37,9 @@ export const loadJobsList = () => async (dispatch) => {
         dispatch(jobsRequestFailed(error.message));
     }
 };
+
+// selectors
+export const getJobs = () => (state) => state.jobs.entities;
+export const loading = () => (state) => state.jobs.isLoading;
+
 export default jobsReducer;

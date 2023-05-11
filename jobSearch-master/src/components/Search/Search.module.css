@@ -1,0 +1,16 @@
+.SearchInput {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #eaebed;
+    border-radius: 8px;
+    color: #acadb9;
+    padding: 13px 36px;
+}
+.SearchButton {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.SearchInputWrapper {
+    position: relative;
+}

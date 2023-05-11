@@ -42,4 +42,12 @@ export const loadJobsList = () => async (dispatch) => {
 export const getJobs = () => (state) => state.jobs.entities;
 export const loading = () => (state) => state.jobs.isLoading;
 
+export const getByIdJobsData = (id) => (state) => {
+    return state.jobs.entities
+        ? state.jobs.entities.objects.find((u) => {
+              return u.id === +id;
+          })
+        : null;
+};
+
 export default jobsReducer;

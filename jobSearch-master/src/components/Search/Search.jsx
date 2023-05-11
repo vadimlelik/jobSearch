@@ -10,7 +10,7 @@ const Search = ({ value }) => (
             value={value}
         />
         <Button className={style.SearchButton}>Поиск</Button>
-        <SearchIcon />
+        <SearchIcon className={style.SearchIcon} />
     </div>
 );
 

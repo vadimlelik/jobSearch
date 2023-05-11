@@ -8,12 +8,19 @@ import Favorites from "./components/Page/Favorites";
 import JobPage from "./components/Page/JobPage";
 import style from "./App.module.css";
 import cn from "classnames";
+import authService from "./service/auth.service";
 
 function App() {
     const dispatch = useDispatch();
 
+    const authLogin = async () => {
+        const data = await authService.login();
+        localStorage.setItem("token", JSON.stringify(data));
+    };
+
     useEffect(() => {
         dispatch(loadJobsList());
+        authLogin();
     }, []);
 
     return (

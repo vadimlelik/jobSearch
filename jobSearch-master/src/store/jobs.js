@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import jobService from "../service/job.service";
+import industryService from "../service/industry.service";
 
 const initialState = {
     isLoading: true,
@@ -33,6 +34,17 @@ export const loadJobsList = () => async (dispatch) => {
     try {
         const content = await jobService.get();
         dispatch(jobsReceived(content));
+    } catch (error) {
+        dispatch(jobsRequestFailed(error.message));
+    }
+};
+export const loadSearchJobs = () => async (dispatch) => {
+    console.log("231231");
+    dispatch(jobsRequested());
+    try {
+        const content = await industryService.get();
+        console.log(content);
+        // dispatch(jobsReceived(content));
     } catch (error) {
         dispatch(jobsRequestFailed(error.message));
     }

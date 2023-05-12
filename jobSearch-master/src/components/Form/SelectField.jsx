@@ -4,7 +4,6 @@ const SelectField = ({
     onChange,
     defaultOption,
     options,
-    error,
     name,
 }) => {
     const handleChange = ({ target }) => {
@@ -17,8 +16,8 @@ const SelectField = ({
             : options;
 
     return (
-        <div className="mb-4">
-            <label htmlFor={name} className="form-label">
+        <div className="">
+            <label htmlFor={name} className="">
                 {label}
             </label>
             <select
@@ -31,14 +30,13 @@ const SelectField = ({
                 <option disabled value="">
                     {defaultOption}
                 </option>
-                {optionsArray.length > 0 &&
+                {optionsArray?.length > 0 &&
                     optionsArray.map((option) => (
-                        <option value={option.value} key={option.value}>
-                            {option.label}
+                        <option value={option.key} key={option.key}>
+                            {option.title}
                         </option>
                     ))}
             </select>
-            {error && <div className="invalid-feedback">{error}</div>}
         </div>
     );
 };

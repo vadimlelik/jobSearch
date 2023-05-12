@@ -17,7 +17,7 @@ const JobList = () => {
                     <h1>...Loading</h1>
                 ) : (
                     <ul>
-                        {data.objects.map((job) => {
+                        {data.objects?.map((job) => {
                             return <JobCard key={job.id} {...job} />;
                         })}
                     </ul>

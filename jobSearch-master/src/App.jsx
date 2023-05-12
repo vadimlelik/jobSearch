@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loadJobsList } from "./store/jobs";
+import { loadJobsList, loadSearchJobs } from "./store/jobs";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout/layout";
 import JobListPage from "./components/Page/JobsListPage";
@@ -9,6 +9,7 @@ import JobPage from "./components/Page/JobPage";
 import style from "./App.module.css";
 import cn from "classnames";
 import authService from "./service/auth.service";
+import { loadCatalogList } from "./store/catalogues";
 
 function App() {
     const dispatch = useDispatch();
@@ -17,9 +18,13 @@ function App() {
         const data = await authService.login();
         localStorage.setItem("token", JSON.stringify(data));
     };
+    // let token = localStorage.getItem("token");
+    // token = JSON.parse(token);
 
     useEffect(() => {
         dispatch(loadJobsList());
+        dispatch(loadCatalogList());
+
         authLogin();
     }, []);
 

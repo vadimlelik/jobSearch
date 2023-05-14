@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import industryService from "../service/industry.service";
-
+import jobService from '../service/job.service'
 const initialState = {
     isLoading: true,
     entities: null,
@@ -22,6 +22,7 @@ const vacanciesSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         },
+
     },
 });
 const { reducer: vacanciesReducer, actions } = vacanciesSlice;
@@ -37,6 +38,7 @@ export const loadCatalogList = () => async (dispatch) => {
         dispatch(vacanciesRequestFailed(error.message));
     }
 };
+
 
 // selector
 

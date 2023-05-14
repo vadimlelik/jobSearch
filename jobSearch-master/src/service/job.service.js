@@ -11,14 +11,16 @@ const jobService = {
         const { data } = await httpService.get(`${jobEndpoint}/${id}`);
         return data;
     },
-    search: async () => {
+    search: async (payload) => {
+        console.log(payload);
         const { data } = await httpService.get(jobEndpoint, {
+
             params: {
-                ublished: 1,
-                keyword: "Директор магазина",
-                payment_from: "1000",
-                payment_to: "",
-                catalogues: 13,
+                published: payload.published,
+                keyword: payload.search,
+                payment_from: payload.paymentFrom,
+                payment_to: paymentTo.paymentTo,
+                catalogues: paymentTo.catalogues,
             },
         });
         return data;

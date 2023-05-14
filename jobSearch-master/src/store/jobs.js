@@ -23,11 +23,22 @@ const jobsSlice = createSlice({
             state.error = action.payload;
             state.isLoading = false;
         },
+        searchRequested: (state) => {
+            state.isLoading = true;
+        },
+        searchReceived: (state, action) => {
+            state.entities = action.payload;
+            state.isLoading = false;
+        },
+        searchRequestFailed: (state, action) => {
+            state.error = action.payload;
+            state.isLoading = false;
+        },
     },
 });
 
 const { reducer: jobsReducer, actions } = jobsSlice;
-const { jobsRequested, jobsReceived, jobsRequestFailed } = actions;
+const { jobsRequested, jobsReceived, jobsRequestFailed, searchRequested, searchReceived, searchRequestFailed } = actions;
 
 export const loadJobsList = () => async (dispatch) => {
     dispatch(jobsRequested());
@@ -38,15 +49,13 @@ export const loadJobsList = () => async (dispatch) => {
         dispatch(jobsRequestFailed(error.message));
     }
 };
-export const loadSearchJobs = () => async (dispatch) => {
-    console.log("231231");
-    dispatch(jobsRequested());
+export const searchJobsList = (payload) => async (dispatch) => {
+    dispatch(searchRequested());
     try {
-        const content = await industryService.get();
-        console.log(content);
-        // dispatch(jobsReceived(content));
+        const content = await jobService.search(payload)
+        dispatch(searchReceived(content));
     } catch (error) {
-        dispatch(jobsRequestFailed(error.message));
+        dispatch(searchRequestFailed(error.message));
     }
 };
 
@@ -57,8 +66,8 @@ export const loading = () => (state) => state.jobs.isLoading;
 export const getByIdJobsData = (id) => (state) => {
     return state.jobs.entities
         ? state.jobs.entities.objects.find((u) => {
-              return u.id === +id;
-          })
+            return u.id === +id;
+        })
         : null;
 };
 

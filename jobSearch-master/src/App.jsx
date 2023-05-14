@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loadJobsList, loadSearchJobs } from "./store/jobs";
+import { loadJobsList } from "./store/jobs";
 import { Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout/layout";
 import JobListPage from "./components/Page/JobsListPage";
@@ -12,33 +12,33 @@ import authService from "./service/auth.service";
 import { loadCatalogList } from "./store/catalogues";
 
 function App() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const authLogin = async () => {
-        const data = await authService.login();
-        localStorage.setItem("token", JSON.stringify(data));
-    };
-    // let token = localStorage.getItem("token");
-    // token = JSON.parse(token);
+  const authLogin = async () => {
+    const data = await authService.login();
+    localStorage.setItem("token", JSON.stringify(data));
+  };
+  // let token = localStorage.getItem("token");
+  // token = JSON.parse(token);
 
-    useEffect(() => {
-        dispatch(loadJobsList());
-        dispatch(loadCatalogList());
+  useEffect(() => {
+    dispatch(loadJobsList());
+    dispatch(loadCatalogList());
 
-        authLogin();
-    }, []);
+    authLogin();
+  }, []);
 
-    return (
-        <div className={cn(style.App)}>
-            <Layout>
-                <Routes>
-                    <Route path="/" element={<JobListPage />} />
-                    <Route path="/:id" element={<JobPage />} />
-                    <Route path="/favorites" element={<Favorites />} />
-                </Routes>
-            </Layout>
-        </div>
-    );
+  return (
+    <div className={cn(style.App)}>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<JobListPage />} />
+          <Route path="/:id" element={<JobPage />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </Layout>
+    </div>
+  );
 }
 
 export default App;

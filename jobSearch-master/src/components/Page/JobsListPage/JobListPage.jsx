@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import style from "./JobListPage.module.css";
 import GroupFilter from "../../GroupFilter/GroupFilter";
 import JobList from "../../JobList/JobList";
+import { useDispatch } from "react-redux";
+import { searchJobsList } from "../../../store/jobs";
 
 const JobListPage = () => {
+  const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
 
   const [data, setData] = useState({
@@ -22,9 +25,8 @@ const JobListPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    dispatch(searchJobsList({ ...data, search: searchQuery }));
     /// тут должен быть запрос не сервер
-    console.log(data, "data", searchQuery, "searchQuery");
   };
 
   const handleReset = () => {};

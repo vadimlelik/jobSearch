@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./JobListPage.module.css";
 import GroupFilter from "../../GroupFilter/GroupFilter";
 import JobList from "../../JobList/JobList";
@@ -6,43 +6,52 @@ import { useDispatch } from "react-redux";
 import { searchJobsList } from "../../../store/jobs";
 
 const JobListPage = () => {
-  const dispatch = useDispatch();
-  const [searchQuery, setSearchQuery] = useState("");
+    const initialState = {
+        published: 1,
+        paymentFrom: "",
+        paymentTo: "",
+        catalogues: "",
+    };
+    const dispatch = useDispatch();
 
-  const [data, setData] = useState({
-    published: 1,
-    paymentFrom: "",
-    paymentTo: "",
-    catalogues: "",
-  });
+    const [searchQuery, setSearchQuery] = useState("");
 
-  const handleChange = (target) => {
-    setData((prevState) => ({
-      ...prevState,
-      [target.name]: target.value,
-    }));
-  };
+    const [data, setData] = useState(initialState);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(searchJobsList({ ...data, search: searchQuery }));
-    /// тут должен быть запрос не сервер
-  };
+    const handleChange = (target) => {
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value,
+        }));
+    };
+    const handleReset = () => {
+        setData(initialState);
+        setSearchQuery("");
+    };
 
-  const handleReset = () => {};
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchJobsList({ ...data, search: searchQuery }));
+        handleReset();
+    };
 
-  return (
-    <div className={style.JobListContainer}>
-      <GroupFilter
-        searchData={data}
-        searchQuery={searchQuery}
-        data={data}
-        handleChange={handleChange}
-        onSubmit={handleSubmit}
-      />
-      <JobList onSearch={setSearchQuery} value={searchQuery} />
-    </div>
-  );
+    return (
+        <div className={style.JobListContainer}>
+            <GroupFilter
+                searchData={data}
+                searchQuery={searchQuery}
+                data={data}
+                handleChange={handleChange}
+                onSubmit={handleSearch}
+                onReset={handleReset}
+            />
+            <JobList
+                onSearch={setSearchQuery}
+                value={searchQuery}
+                handleSearch={handleSearch}
+            />
+        </div>
+    );
 };
 
 export default JobListPage;

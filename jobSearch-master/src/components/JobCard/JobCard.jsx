@@ -3,6 +3,8 @@ import style from "./JobCard.module.css";
 import { ReactComponent as LocationIcon } from "./icon/location_icon.svg";
 import { ReactComponent as BookmarkIcon } from "./icon//bookmark _icon.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { favoriteAdd } from "../../store/favorite";
 
 const JobCard = ({
     profession,
@@ -14,6 +16,11 @@ const JobCard = ({
     payment_from,
     id,
 }) => {
+    const dispatch = useDispatch();
+    const setCardFavorite = () => {
+        dispatch(favoriteAdd(id));
+    };
+
     return (
         <li className={style.JobCard}>
             <Link className={style.JobCardProfession} to={`/${id}`}>
@@ -31,7 +38,10 @@ const JobCard = ({
                 <LocationIcon />
                 <span className={style.JobCardCity}>{town.title}</span>
             </div>
-            <BookmarkIcon className={style.JobCardBookmark} />
+            <BookmarkIcon
+                className={style.JobCardBookmark}
+                onClick={setCardFavorite}
+            />
         </li>
     );
 };

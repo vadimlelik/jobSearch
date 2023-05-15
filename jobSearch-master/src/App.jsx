@@ -22,10 +22,9 @@ function App() {
   // token = JSON.parse(token);
 
   useEffect(() => {
+    authLogin();
     dispatch(loadJobsList());
     dispatch(loadCatalogList());
-
-    authLogin();
   }, []);
 
   return (

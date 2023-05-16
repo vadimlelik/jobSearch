@@ -3,8 +3,8 @@ import style from "./JobCard.module.css";
 import { ReactComponent as LocationIcon } from "./icon/location_icon.svg";
 import { ReactComponent as BookmarkIcon } from "./icon//bookmark _icon.svg";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { favoriteAdd } from "../../store/favorite";
+import { useDispatch, useSelector } from "react-redux";
+import { favoriteAdd, getFavorite } from "../../store/favorite";
 
 const JobCard = ({
     profession,
@@ -17,6 +17,7 @@ const JobCard = ({
     id,
 }) => {
     const dispatch = useDispatch();
+    const fav = useSelector(getFavorite());
     const setCardFavorite = () => {
         dispatch(favoriteAdd(id));
     };

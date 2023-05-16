@@ -1,5 +1,4 @@
 .Button {
-    padding: 6px 20px;
     background: #5e96fc;
     border-radius: 8px;
     border: none;
@@ -8,4 +7,23 @@
     font-size: 14px;
     line-height: 21px;
     cursor: pointer;
+}
+.ButtonS {
+    padding: 5px 20px;
+}
+.ButtonM {
+}
+.ButtonL {
+    padding: 9px 20px;
+}
+.Link {
+    border: none;
+    color: #acadb9;
+    background-color: transparent;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }

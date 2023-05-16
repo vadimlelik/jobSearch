@@ -38,7 +38,14 @@ const jobsSlice = createSlice({
 });
 
 const { reducer: jobsReducer, actions } = jobsSlice;
-const { jobsRequested, jobsReceived, jobsRequestFailed, searchRequested, searchReceived, searchRequestFailed } = actions;
+const {
+    jobsRequested,
+    jobsReceived,
+    jobsRequestFailed,
+    searchRequested,
+    searchReceived,
+    searchRequestFailed,
+} = actions;
 
 export const loadJobsList = () => async (dispatch) => {
     dispatch(jobsRequested());
@@ -52,7 +59,7 @@ export const loadJobsList = () => async (dispatch) => {
 export const searchJobsList = (payload) => async (dispatch) => {
     dispatch(searchRequested());
     try {
-        const content = await jobService.search(payload)
+        const content = await jobService.search(payload);
         dispatch(searchReceived(content));
     } catch (error) {
         dispatch(searchRequestFailed(error.message));
@@ -66,9 +73,24 @@ export const loading = () => (state) => state.jobs.isLoading;
 export const getByIdJobsData = (id) => (state) => {
     return state.jobs.entities
         ? state.jobs.entities.objects.find((u) => {
-            return u.id === +id;
-        })
+              return u.id === +id;
+          })
         : null;
+};
+export const getByIdJobsArray = (jobsId) => (state) => {
+    if (state.jobs.entities.objects) {
+        const jobsArray = [];
+        for (const id of jobsId) {
+            for (const jobs of state.jobs.entities.objects) {
+                if (jobs.id === Number(id)) {
+                    jobsArray.push(jobs);
+                    break;
+                }
+            }
+        }
+        return jobsArray;
+    }
+    return [];
 };
 
 export default jobsReducer;

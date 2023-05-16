@@ -12,6 +12,7 @@
 .MenuList {
     margin-left: 280px;
     display: flex;
+    list-style: none;
 }
 .MenuItem {
     margin-left: 60px;

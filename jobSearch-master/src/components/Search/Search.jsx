@@ -10,7 +10,7 @@ const Search = ({ value, onSearch, handleSearch }) => (
             value={value}
             onChange={(e) => onSearch(e.target.value)}
         />
-        <Button className={style.SearchButton} onClick={handleSearch}>
+        <Button className={style.SearchButton} size="S" onClick={handleSearch}>
             Поиск
         </Button>
         <SearchIcon className={style.SearchIcon} />

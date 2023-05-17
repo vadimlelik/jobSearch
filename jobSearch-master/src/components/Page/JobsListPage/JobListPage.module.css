@@ -1,6 +1,7 @@
 .JobListContainer {
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 40px;
-    display: flex;
+  max-width: 1145px;
+  margin: 0 auto;
+  padding: 0px 15px;
+  margin-top: 40px;
+  display: flex;
 }

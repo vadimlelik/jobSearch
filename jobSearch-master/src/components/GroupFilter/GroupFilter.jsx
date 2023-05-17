@@ -1,49 +1,89 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../Button";
-import SelectField from "../Form/SelectField";
-import { useSelector } from "react-redux";
+import { Select, NumberInput } from "@mantine/core";
+import { useDispatch, useSelector } from "react-redux";
 import { getError, getIsLoading, getVacancies } from "../../store/catalogues";
-import Field from "../Form/Field";
+import { searchJobsList } from "../../store/jobs";
+import { ReactComponent as ArrowIcon } from "./icon/arrow.svg";
+import { ReactComponent as ArrowBtnIcon } from "./icon/arrow_btn.svg";
 import styles from "./GroupList.module.css";
 
-const GroupFilter = ({ data, handleChange, onSubmit, onReset }) => {
+const GroupFilter = ({ search, onReset }) => {
+    const dispatch = useDispatch();
     const vacancies = useSelector(getVacancies());
     const isLoading = useSelector(getIsLoading());
     const error = useSelector(getError());
+    const [vacanciesList, setVacanciesList] = useState([]);
+
+    const [value, setValue] = useState("");
+    const [paymentTo, setPaymentTo] = useState();
+    const [paymentFrom, setPaymentFrom] = useState();
+
+    useEffect(() => {
+        if (!isLoading) {
+            setVacanciesList(
+                vacancies.map((vac) => {
+                    return { value: vac.key, label: vac.title_trimmed };
+                })
+            );
+        }
+    }, [isLoading]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        dispatch(
+            searchJobsList({
+                paymentFrom,
+                paymentTo,
+                catalogues: value,
+                published: 1,
+                keyword: search,
+            })
+        );
+    };
+    const handleReset = () => {
+        setValue("");
+        setPaymentTo(0);
+        setPaymentFrom(0);
+        onReset("");
+    };
 
     if (!isLoading) {
         return (
             <div className={styles.FormWrapper}>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleSearch}>
                     <h3 className={styles.FormTitle}>Фильтры</h3>
-                    <Button onClick={onReset} theme="link">
+
+                    <Button theme="link" onClick={handleReset}>
                         Cбросить все x
                     </Button>
-
-                    <SelectField
-                        options={vacancies}
+                    <Select
+                        placeholder="Выберете отрасль "
+                        data={vacanciesList}
+                        value={value}
+                        onChange={setValue}
+                        rightSection={<ArrowIcon size="1rem" />}
+                        className={styles.Select}
                         label="Отрасль"
-                        defaultOption="Выберете отрасль"
-                        onChange={handleChange}
-                        value={data.catalogues}
-                        name="catalogues"
                     />
-                    <Field
-                        type="number"
-                        label="Оклад"
+                    <NumberInput
                         placeholder="От"
-                        onChange={handleChange}
-                        value={data.paymentFrom}
-                        name="paymentFrom"
+                        value={paymentFrom}
+                        onChange={setPaymentFrom}
+                        label="Оклад"
+                        className={styles.NumberInput}
+                        hideControls
+                        rightSection={<ArrowBtnIcon size="1rem" />}
                     />
-                    <Field
-                        type="number"
+                    <NumberInput
                         placeholder="До"
-                        onChange={handleChange}
-                        value={data.paymentTo}
-                        name="paymentTo"
+                        value={paymentTo}
+                        onChange={setPaymentTo}
+                        hideControls
+                        rightSection={<ArrowBtnIcon size="1rem" />}
                     />
-                    <Button className={styles.BtnForm} size="L" type="submit">
+
+                    <Button className={styles.BtnForm} size="M" type="submit">
                         Применить
                     </Button>
                 </form>

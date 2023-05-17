@@ -1,6 +1,7 @@
 .FormWrapper {
     padding: 20px;
     background: #ffffff;
+    width: 330px;
     border: 1px solid #eaebed;
     border-radius: 12px;
     height: 360px;
@@ -16,4 +17,11 @@
 .BtnForm {
     width: 100%;
     margin-top: 30px;
+}
+.Select {
+    margin-top: 32px;
+}
+.NumberInput {
+    margin-top: 20px;
+    margin-bottom: 8px;
 }

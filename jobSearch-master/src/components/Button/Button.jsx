@@ -12,7 +12,6 @@ const Button = ({ children, className, type, size, theme, ...rest }) => {
                     [style.Link]: theme === "link",
                     [style.ButtonS]: size === "S",
                     [style.ButtonM]: size === "M",
-                    [style.ButtonL]: size === "L",
                 },
                 [className]
             )}

@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as Logo } from "./icon/logo.svg";
 import style from "./NavBar.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const Navbar = () => {
     return (
@@ -12,14 +12,24 @@ export const Navbar = () => {
                 <nav className="menu">
                     <ul className={style.MenuList}>
                         <li className={style.MenuItem}>
-                            <Link className={style.MenuLink} to="/">
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? [style.active] : [style.MenuLink]
+                                }
+                                to="/"
+                            >
                                 Поиск Вакансий{" "}
-                            </Link>
+                            </NavLink>
                         </li>
                         <li className={style.MenuItem}>
-                            <Link className={style.MenuLink} to="/favorites">
+                            <NavLink
+                                className={({ isActive }) =>
+                                    isActive ? [style.active] : [style.MenuLink]
+                                }
+                                to="/favorites"
+                            >
                                 Избранное
-                            </Link>
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

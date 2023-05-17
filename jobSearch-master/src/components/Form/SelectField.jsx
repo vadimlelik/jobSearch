@@ -34,7 +34,11 @@ const SelectField = ({
                 </option>
                 {optionsArray?.length > 0 &&
                     optionsArray.map((option) => (
-                        <option value={option.key} key={option.key}>
+                        <option
+                            value={option.key}
+                            key={option.key}
+                            className={styles.Option}
+                        >
                             {option.title}
                         </option>
                     ))}

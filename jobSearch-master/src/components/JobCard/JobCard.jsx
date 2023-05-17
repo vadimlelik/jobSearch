@@ -33,7 +33,6 @@ const JobCard = ({
         storeData[id] ? setPersonFavorite(true) : setPersonFavorite(false);
     }, [storeData[id]]);
 
-    console.log(personFavorite);
     return (
         <li className={style.JobCard}>
             <Link className={style.JobCardProfession} to={`/${id}`}>
@@ -55,7 +54,6 @@ const JobCard = ({
                 className={cn(style.JobCardBookmark, {
                     [style.ActiveBookmark]: personFavorite,
                 })}
-                // className={style.JobCardBookmark}
                 onClick={() => setCardFavorite(id)}
             />
         </li>

@@ -8,15 +8,6 @@ import Search from "../Search";
 const JobList = ({ onSearch, value, handleSearch }) => {
     const data = useSelector(getJobs());
     const isLoading = useSelector(loading());
-    const isMounted = useRef(false);
-
-    // useEffect(() => {
-    //     if (isMounted.current) {
-    //         const json = JSON.stringify(data);
-    //         localStorage.setItem("jobId", json);
-    //     }
-    //     isMounted.current = true;
-    // }, [data]);
 
     return (
         <div>

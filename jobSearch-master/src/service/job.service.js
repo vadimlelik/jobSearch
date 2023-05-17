@@ -12,14 +12,13 @@ const jobService = {
         return data;
     },
     search: async (payload) => {
-        console.log(payload);
         const { data } = await httpService.get(jobEndpoint, {
             params: {
-                "published": 1,
-                "keyword": payload.search,
-                "payment_to": paymentTo.paymentTo,
-                "payment_from": payload.paymentFrom,
-                "catalogues": paymentTo.catalogues,
+                published: 1,
+                keyword: payload.search,
+                payment_to: payload.paymentTo,
+                payment_from: payload.paymentFrom,
+                catalogues: payload.catalogues,
             },
         });
         return data;

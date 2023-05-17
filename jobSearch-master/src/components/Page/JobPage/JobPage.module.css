@@ -5,7 +5,11 @@
     display: flex;
 }
 .Info {
+    margin-top: 20px;
     padding: 24px;
+    background: #ffffff;
+    border: 1px solid #eaebed;
+    border-radius: 12px;
 }
 .Info > p {
     font-weight: 700;

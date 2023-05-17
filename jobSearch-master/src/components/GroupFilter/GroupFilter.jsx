@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Loader } from "@mantine/core";
 import Button from "../Button";
 import { Select, NumberInput } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -90,7 +91,7 @@ const GroupFilter = ({ search, onReset }) => {
             </div>
         );
     } else {
-        return <h1>Loading</h1>;
+        return <Loader color="gray" size="xl" className={styles.Loader} />;
     }
 };
 

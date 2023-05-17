@@ -73,12 +73,12 @@ export const loading = () => (state) => state.jobs.isLoading;
 export const getByIdJobsData = (id) => (state) => {
     return state.jobs.entities
         ? state.jobs.entities.objects.find((u) => {
-              return u.id === +id;
-          })
+            return u.id === +id;
+        })
         : null;
 };
 export const getByIdJobsArray = (jobsId) => (state) => {
-    if (state.jobs.entities.objects) {
+    if (state.jobs.entities) {
         const jobsArray = [];
         for (const id of jobsId) {
             for (const jobs of state.jobs.entities.objects) {

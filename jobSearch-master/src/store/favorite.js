@@ -17,7 +17,7 @@ const favoriteSlice = createSlice({
             };
         },
         favoriteRemove: (state, action) => {
-            state.entities = omit(state, [action.payload]);
+            state.entities = omit(state.entities, [action.payload]);
         },
     },
 });

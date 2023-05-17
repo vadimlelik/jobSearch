@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./JobCard.module.css";
 import { ReactComponent as LocationIcon } from "./icon/location_icon.svg";
 import { ReactComponent as BookmarkIcon } from "./icon//bookmark _icon.svg";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { favoriteAdd, getFavorite } from "../../store/favorite";
+import { favoriteAdd, getFavorite, favoriteRemove } from "../../store/favorite";
+import cn from "classnames";
 
 const JobCard = ({
     profession,
@@ -16,12 +17,23 @@ const JobCard = ({
     payment_from,
     id,
 }) => {
+    const [personFavorite, setPersonFavorite] = useState(false);
     const dispatch = useDispatch();
-    const fav = useSelector(getFavorite());
-    const setCardFavorite = () => {
-        dispatch(favoriteAdd(id));
+    const storeData = useSelector(getFavorite());
+
+    const setCardFavorite = (id) => {
+        if (id === storeData[id]) {
+            dispatch(favoriteRemove(id));
+        } else {
+            dispatch(favoriteAdd(id));
+        }
     };
 
+    useEffect(() => {
+        storeData[id] ? setPersonFavorite(true) : setPersonFavorite(false);
+    }, [storeData[id]]);
+
+    console.log(personFavorite);
     return (
         <li className={style.JobCard}>
             <Link className={style.JobCardProfession} to={`/${id}`}>
@@ -40,8 +52,11 @@ const JobCard = ({
                 <span className={style.JobCardCity}>{town.title}</span>
             </div>
             <BookmarkIcon
-                className={style.JobCardBookmark}
-                onClick={setCardFavorite}
+                className={cn(style.JobCardBookmark, {
+                    [style.ActiveBookmark]: personFavorite,
+                })}
+                // className={style.JobCardBookmark}
+                onClick={() => setCardFavorite(id)}
             />
         </li>
     );

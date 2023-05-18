@@ -3,5 +3,9 @@
   margin: 0 auto;
   padding: 0px 15px;
   margin-top: 40px;
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "form search "
+    "form list "
+    "form list";
 }

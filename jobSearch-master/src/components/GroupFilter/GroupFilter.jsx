@@ -8,8 +8,11 @@ import { searchJobsList } from "../../store/jobs";
 import { ReactComponent as ArrowIcon } from "./icon/arrow.svg";
 import { ReactComponent as ArrowBtnIcon } from "./icon/arrow_btn.svg";
 import styles from "./GroupList.module.css";
+import Search from "../Search";
 
-const GroupFilter = ({ search, onReset }) => {
+const GroupFilter = ({ onReset }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const dispatch = useDispatch();
   const vacancies = useSelector(getVacancies());
   const isLoading = useSelector(getIsLoading());
@@ -38,7 +41,7 @@ const GroupFilter = ({ search, onReset }) => {
         paymentTo,
         catalogues: value,
         published: 1,
-        keyword: search,
+        keyword: searchQuery,
       })
     );
   };
@@ -46,15 +49,14 @@ const GroupFilter = ({ search, onReset }) => {
     setValue("");
     setPaymentTo(0);
     setPaymentFrom(0);
-    onReset("");
+    setSearchQuery("");
   };
 
   if (!isLoading) {
     return (
-      <div>
+      <>
         <form onSubmit={handleSearch} className={styles.FormWrapper}>
           <h3 className={styles.FormTitle}>Фильтры</h3>
-
           <Button theme="link" onClick={handleReset}>
             Cбросить все x
           </Button>
@@ -88,7 +90,13 @@ const GroupFilter = ({ search, onReset }) => {
             Применить
           </Button>
         </form>
-      </div>
+
+        <Search
+          onSearch={setSearchQuery}
+          value={searchQuery}
+          handleSearch={handleSearch}
+        />
+      </>
     );
   } else {
     return <Loader color="gray" size="xl" className={styles.Loader} />;

@@ -1,21 +1,22 @@
 .SearchInput {
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #eaebed;
-    border-radius: 8px;
-    color: #acadb9;
-    padding: 13px 36px;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #eaebed;
+  border-radius: 8px;
+  color: #acadb9;
+  padding: 13px 36px;
 }
 .SearchButton {
-    position: absolute;
-    top: 5px;
-    right: 10px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 .SearchInputWrapper {
-    position: relative;
+  grid-area: search;
+  position: relative;
 }
 .SearchIcon {
-    position: absolute;
-    top: 14px;
-    left: 14px;
+  position: absolute;
+  top: 14px;
+  left: 14px;
 }

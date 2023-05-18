@@ -10,15 +10,13 @@ import { ReactComponent as ArrowBtnIcon } from "./icon/arrow_btn.svg";
 import styles from "./GroupList.module.css";
 import Search from "../Search";
 
-const GroupFilter = ({ onReset }) => {
+const GroupFilter = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
+  const error = useSelector(getError());
   const dispatch = useDispatch();
   const vacancies = useSelector(getVacancies());
   const isLoading = useSelector(getIsLoading());
-  const error = useSelector(getError());
   const [vacanciesList, setVacanciesList] = useState([]);
-
   const [value, setValue] = useState("");
   const [paymentTo, setPaymentTo] = useState();
   const [paymentFrom, setPaymentFrom] = useState();

@@ -19,5 +19,16 @@
             "form"
             "search"
             "list";
+        gap: 20px 28px;
+    }
+}
+@media (max-width: 440px) {
+    .JobListContainer {
+        grid-template-columns: minmax(300px, 1fr);
+        grid-template-areas:
+            "form"
+            "search"
+            "list";
+        gap: 20px 28px;
     }
 }

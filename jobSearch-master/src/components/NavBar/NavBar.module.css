@@ -19,16 +19,48 @@
     margin-left: 60px;
 }
 .MenuLink {
+    font-size: 16px;
     color: #232134;
 }
 .active {
     font-weight: 500;
-    font-size: 16px;
     line-height: 20px;
     color: #5e96fc;
 }
 
-.logo {
-}
 .menu {
+}
+
+@media (max-width: 765px) {
+    .MenuList {
+        margin-left: 0px;
+        justify-content: space-between;
+    }
+
+    .MenuItem {
+        margin-left: 0px;
+        margin-right: 15px;
+    }
+    .container {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 440px) {
+    .Logo {
+        width: 100px;
+        height: 30px;
+    }
+    .MenuLink {
+        font-size: 12px;
+    }
+    .active {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 20px;
+        color: #5e96fc;
+    }
+    .MenuItem:last-child {
+        margin-right: 0px;
+    }
 }

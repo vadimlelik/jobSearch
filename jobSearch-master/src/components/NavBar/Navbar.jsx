@@ -7,7 +7,7 @@ export const Navbar = () => {
     return (
         <div className={style.Navbar}>
             <div className={style.container}>
-                <Logo />
+                <Logo className={style.Logo} />
 
                 <nav className="menu">
                     <ul className={style.MenuList}>

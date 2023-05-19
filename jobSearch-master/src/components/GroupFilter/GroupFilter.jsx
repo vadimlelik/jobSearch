@@ -3,7 +3,7 @@ import { Loader } from "@mantine/core";
 import Button from "../Button";
 import { Select, NumberInput } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
-import { getError, getIsLoading, getVacancies } from "../../store/catalogues";
+import { getVacancies, getVacanciesIsLoading } from "../../store/catalogues";
 import { searchJobsList } from "../../store/jobs";
 import { ReactComponent as ArrowIcon } from "./icon/arrow.svg";
 import { ReactComponent as ArrowBtnIcon } from "./icon/arrow_btn.svg";
@@ -12,24 +12,24 @@ import Search from "../Search";
 
 const GroupFilter = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const error = useSelector(getError());
+  // const error = useSelector(getError()); // можно обрабытывать и ошибку !
   const dispatch = useDispatch();
   const vacancies = useSelector(getVacancies());
-  const isLoading = useSelector(getIsLoading());
+  const isVacanciesLoading = useSelector(getVacanciesIsLoading());
   const [vacanciesList, setVacanciesList] = useState([]);
   const [value, setValue] = useState("");
   const [paymentTo, setPaymentTo] = useState();
   const [paymentFrom, setPaymentFrom] = useState();
 
   useEffect(() => {
-    if (!isLoading) {
+    if (!isVacanciesLoading) {
       setVacanciesList(
         vacancies.map((vac) => {
           return { value: vac.key, label: vac.title_trimmed };
         })
       );
     }
-  }, [isLoading]);
+  }, [isVacanciesLoading]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -50,7 +50,7 @@ const GroupFilter = () => {
     setSearchQuery("");
   };
 
-  if (!isLoading) {
+  if (!isVacanciesLoading) {
     return (
       <>
         <form onSubmit={handleSearch} className={styles.FormWrapper}>

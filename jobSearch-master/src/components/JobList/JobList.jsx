@@ -1,18 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import style from "./JobList.module.css";
 import { useSelector } from "react-redux";
-import { getJobs, loading } from "../../store/jobs";
+import { getJobs, getJobsIsLoading } from "../../store/jobs";
 import JobCard from "../JobCard/JobCard";
-import Search from "../Search";
 import { Loader } from "@mantine/core";
 
 const JobList = () => {
   const data = useSelector(getJobs());
-  const isLoading = useSelector(loading());
-
+  const isJobsLoading = useSelector(getJobsIsLoading());
   return (
     <div className={style.JobList}>
-      {isLoading ? (
+      {isJobsLoading ? (
         <Loader color="gray" size="xl" />
       ) : (
         <ul>

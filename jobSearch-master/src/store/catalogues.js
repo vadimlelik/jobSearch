@@ -43,7 +43,7 @@ export const loadCatalogList = () => async (dispatch) => {
 // selector
 
 export const getVacancies = () => (state) => state.vacancies.entities;
-export const getIsLoading = () => (state) => state.vacancies.isLoading;
+export const getVacanciesIsLoading = () => (state) => state.vacancies.isLoading;
 export const getError = () => (state) => state.vacancies.error;
 
 export default vacanciesReducer;

@@ -68,7 +68,7 @@ export const searchJobsList = (payload) => async (dispatch) => {
 
 // selectors
 export const getJobs = () => (state) => state.jobs.entities;
-export const loading = () => (state) => state.jobs.isLoading;
+export const getJobsIsLoading = () => (state) => state.jobs.isLoading;
 
 export const getByIdJobsData = (id) => (state) => {
     return state.jobs.entities

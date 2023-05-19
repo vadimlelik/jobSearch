@@ -1,11 +1,23 @@
 .JobListContainer {
-  max-width: 1145px;
-  margin: 0 auto;
-  padding: 0px 15px;
-  margin-top: 40px;
-  display: grid;
-  grid-template-areas:
-    "form search "
-    "form list "
-    "form list";
+    grid-template-columns: 315px auto;
+    gap: 0px 28px;
+    max-width: 1145px;
+    margin: 0 auto;
+    padding: 0px 15px;
+    margin-top: 40px;
+    display: grid;
+    grid-template-areas:
+        "form search "
+        "form list "
+        "form list";
+}
+
+@media (max-width: 765px) {
+    .JobListContainer {
+        grid-template-columns: minmax(320px, 1fr);
+        grid-template-areas:
+            "form"
+            "search"
+            "list";
+    }
 }
